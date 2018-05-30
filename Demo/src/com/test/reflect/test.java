@@ -37,7 +37,8 @@ public class test {
 		person person1 =(person)constructor.newInstance(null);
 		//调用构造函数
 		person1.person("MI");
-		person1.person(true);
+		//person1.person(true);
+		person1.run();
 	
 	}
 
