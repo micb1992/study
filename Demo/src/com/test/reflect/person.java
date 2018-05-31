@@ -17,21 +17,24 @@ public class person {
 		this.name = name;
 		System.out.println("-----公共的构造函数-----");
 		System.out.println("-----" + name + "-----");
+		run();
 	}
 
-	private void person(String name, int age) {
+	protected void person(String name, int age) {
 		this.age = age;
-		System.out.println("-----私有的构造函数-----");
+		System.out.println("-----受保护的构造函数-----");
 		System.out.println("-----" + name + age + "岁了-----");
+		run();
 	}
 
 	protected void person(Boolean sex) {
 		this.sex = sex;
 		System.out.println("-----受保护的构造函数-----");
 		System.out.println("-----" + sex + "-----");
+		run();
 	}
 
-	public void run() {
+	private void run() {
 		System.out.println(name + "正在狂跑");
 		if (sex == true) {
 			System.out.println("他今年" + age + "岁了,是个帅气的男孩");
@@ -40,5 +43,15 @@ public class person {
 			System.out.println("她今年" + age + "岁了,是个漂亮的姑娘");
 		}
 
+	}
+
+	public void eat() {
+		System.out.println(name + "正在狂吃");
+		if (sex == true) {
+			System.out.println("他今年" + age + "岁了,是个帅气的吃货");
+
+		} else {
+			System.out.println("她今年" + age + "岁了,是个漂亮的饭桶");
+		}
 	}
 }
