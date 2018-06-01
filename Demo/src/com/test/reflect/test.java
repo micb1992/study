@@ -1,21 +1,21 @@
 package com.test.reflect;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
+import org.junit.Test;
+
 
 public class test {
 
 	public static void main(String[] args) throws Exception {
 		//反射使用步骤：1、加载类到内存当中 2、解析类 3、调用
 		//constructorLoadClass();
-		constructorAnalysisClass();
+		//constructorAnalysisClass();
 	}
 
 
-
-	public static void constructorLoadClass() throws Exception {
+@Test
+	public void constructorLoadClass() throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("反射----获取公共、受保护的构造函数");
 		/*
@@ -31,7 +31,7 @@ public class test {
 		 */
 		// 步骤1：加载类到内存当中
 		Class classConstructorLoadClass = Class
-				.forName("com.test.reflect.person");
+				.forName("com.test.reflect.Person");
 		
 		// 步骤2：解析类的构造函数
 		Constructor constructor = classConstructorLoadClass.getConstructor(null);
@@ -39,15 +39,13 @@ public class test {
 		System.out.println("返回无参构造函数" + constructor);
 		
 		//步骤3： 创建对象--类型需要强制转换
-		person p1 = (person) constructor.newInstance(null);
-		// 调用构造函数
-		p1.person("MI");
-		p1.person(true);
-		p1.person("micb", 23);
+		Person p1 = (Person) constructor.newInstance(null);
 	
 
 	}
-	public static void constructorAnalysisClass() throws Exception {
+
+	@Test
+	public void constructorAnalysisClass() throws Exception {
 		// TODO Auto-generated method stub
 		/*	解析类：
 		Class对象提供了如下常用方法
@@ -59,19 +57,28 @@ public class test {
 		Pubic Method getDeclareMethod(String name,Class...parameterTypes)
 		public Field getDeclareField(String name) */
 		
-		Class classconstructorAnalysisClass =Class.forName("com.test.reflect.person");
+		Class classconstructorAnalysisClass =Class.forName("com.test.reflect.Person");
 		
 		//批量获取构造方法
 		Constructor[] constructor1 = classconstructorAnalysisClass.getConstructors();
 		for(Constructor i:constructor1){
 			System.out.println("getConstructors批量获取的构造方法："+i);
 		}
-	
+		
 		Constructor[] constructor2 = classconstructorAnalysisClass.getDeclaredConstructors();
 		for(Constructor i:constructor2){
 			System.out.println("getDeclaredConstructors批量获取的构造方法："+i);
 		}
+		//获取单个构造方法
 		
+		Constructor constructor3 = classconstructorAnalysisClass.getConstructor(String.class);
+		Person p =(Person) constructor3.newInstance("呵呵");
+		
+		/*Constructor constructor4 = classconstructorAnalysisClass.getDeclaredConstructor(Boolean.class);
+		
+		Person p4 =(Person) constructor4.newInstance(false);
+		p4.Person("hehe", 16);*/
+
 	}
 
 }

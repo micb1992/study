@@ -2,32 +2,32 @@ package com.test.reflect;
 
 import java.awt.List;
 
-public class person {
+public class Person {
 	String name = "";
 	int age;
 	Boolean sex = true;
 
 	// 无参函数有什么作用？
-	public void person() {
+	public Person() {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void person(String name) {
+	public Person(String name) {
 		this.name = name;
 		System.out.println("-----公共的构造函数-----");
 		System.out.println("-----" + name + "-----");
 		run();
 	}
 
-	protected void person(String name, int age) {
+	protected  Person(String name, int age) {
 		this.age = age;
 		System.out.println("-----受保护的构造函数-----");
 		System.out.println("-----" + name + age + "岁了-----");
 		run();
 	}
 
-	protected void person(Boolean sex) {
+	protected Person(Boolean sex) {
 		this.sex = sex;
 		System.out.println("-----受保护的构造函数-----");
 		System.out.println("-----" + sex + "-----");
