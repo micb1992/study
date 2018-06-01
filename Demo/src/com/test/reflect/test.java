@@ -6,7 +6,7 @@ import org.junit.Test;
 
 
 public class test {
-
+//参考地址：https://blog.csdn.net/sinat_38259539/article/details/71799078
 	public static void main(String[] args) throws Exception {
 		//反射使用步骤：1、加载类到内存当中 2、解析类 3、调用
 		//constructorLoadClass();
@@ -14,7 +14,7 @@ public class test {
 	}
 
 
-@Test
+
 	public void constructorLoadClass() throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("反射----获取公共、受保护的构造函数");
@@ -32,15 +32,17 @@ public class test {
 		// 步骤1：加载类到内存当中
 		Class classConstructorLoadClass = Class
 				.forName("com.test.reflect.Person");
-		
+
 		// 步骤2：解析类的构造函数
-		Constructor constructor = classConstructorLoadClass.getConstructor(null);
+		Constructor constructor = classConstructorLoadClass
+				.getConstructor(null);
 		// 调返回无参构造函数
 		System.out.println("返回无参构造函数" + constructor);
-		
-		//步骤3： 创建对象--类型需要强制转换
+
+		// 步骤3： 创建对象--类型需要强制转换
 		Person p1 = (Person) constructor.newInstance(null);
-	
+		// 步骤4:调用方法
+		p1.eat();
 
 	}
 
@@ -69,16 +71,15 @@ public class test {
 		for(Constructor i:constructor2){
 			System.out.println("getDeclaredConstructors批量获取的构造方法："+i);
 		}
-		//获取单个构造方法
-		
+		//获取单个构造方法--可以获取到所有公有的构造方法--public protected 默认 
 		Constructor constructor3 = classconstructorAnalysisClass.getConstructor(String.class);
 		Person p =(Person) constructor3.newInstance("呵呵");
-		
-		/*Constructor constructor4 = classconstructorAnalysisClass.getDeclaredConstructor(Boolean.class);
-		
+		//获取单个构造方法--可以获取到所有的构造方法，包含私有--public protected private 默认
+		Constructor constructor4 = classconstructorAnalysisClass.getDeclaredConstructor(Boolean.class);
+		//私有方法只能被类中的其他函数调用，但是反射可以暴力访问
+		constructor4.setAccessible(true);
 		Person p4 =(Person) constructor4.newInstance(false);
-		p4.Person("hehe", 16);*/
-
+	
 	}
 
 }

@@ -7,10 +7,10 @@ public class Person {
 	int age;
 	Boolean sex = true;
 
-	// 无参函数有什么作用？
+	// 无参函数
 	public Person() {
 		// TODO Auto-generated method stub
-
+System.out.println("------无参函数被调用了-----");
 	}
 
 	public Person(String name) {
@@ -27,12 +27,12 @@ public class Person {
 		run();
 	}
 
-	protected Person(Boolean sex) {
+	private Person(Boolean sex) {
 		this.sex = sex;
-		System.out.println("-----受保护的构造函数-----");
-		System.out.println("-----" + sex + "-----");
+		System.out.println("-----私有的构造函数-----");
 		run();
 	}
+	
 
 	private void run() {
 		System.out.println(name + "正在狂跑");
