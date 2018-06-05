@@ -102,6 +102,23 @@ public class test {
 		for(Field field:personfield2){
 			System.out.println(field);
 		}
+		//获取公有成员变量并进行初始化
+		   System.out.println("************获取公有字段并调用***********************");  
+			Class persponClass3 = Class.forName("com.test.reflect.Person");
+			Field personfield3 =persponClass3.getField("name");
+			Person person5 = (Person) persponClass3.getConstructor().newInstance();
+			personfield3.set(person5, "lala");
+			System.out.println("验证获取成员变量值："+person5.name);
+			
+			//获取私有成员变量并进行初始化
+			   System.out.println("************获取私有字段并调用***********************");  
+				Class persponClass4 = Class.forName("com.test.reflect.Person");
+				Field personfield4 =persponClass4.getField("name");
+				Person person6 = (Person) persponClass4.getConstructor().newInstance();
+				personfield4.setAccessible(true);
+				personfield4.set(person6, "呵呵哒");
+				System.out.println("验证获取成员变量值："+person6.name);
+				
 	}
 
 }
