@@ -1,8 +1,12 @@
 package com.test.reflect;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+
+import javax.activation.FileDataSource;
 
 import org.junit.Test;
+
 
 
 public class test {
@@ -11,6 +15,7 @@ public class test {
 		//反射使用步骤：1、加载类到内存当中 2、解析类 3、调用
 		//constructorLoadClass();
 		//constructorAnalysisClass();
+		//filedAnaysisClass();
 	}
 
 
@@ -46,7 +51,7 @@ public class test {
 
 	}
 
-	@Test
+	
 	public void constructorAnalysisClass() throws Exception {
 		// TODO Auto-generated method stub
 		/*	解析类：
@@ -80,6 +85,23 @@ public class test {
 		constructor4.setAccessible(true);
 		Person p4 =(Person) constructor4.newInstance(false);
 	
+	}
+	@Test
+	public void filedAnaysisClass() throws Exception{
+		//获取公有成员变量--公有字段
+        System.out.println("************获取所有公有的字段********************");  
+        Class persponClass1 = Class.forName("com.test.reflect.Person");
+		Field[] personfield1 =persponClass1.getFields();
+		for(Field field:personfield1){
+			System.out.println(field);
+		}
+		//获取所有字段，包含私有--public protected private 默认
+        System.out.println("************获取所有的字段***********************");  
+		Class persponClass2 = Class.forName("com.test.reflect.Person");
+		Field[] personfield2 =persponClass2.getDeclaredFields();
+		for(Field field:personfield2){
+			System.out.println(field);
+		}
 	}
 
 }

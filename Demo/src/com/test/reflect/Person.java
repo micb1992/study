@@ -3,9 +3,10 @@ package com.test.reflect;
 import java.awt.List;
 
 public class Person {
-	String name = "";
-	int age;
+	public String name = "";
+	protected int age;
 	Boolean sex = true;
+	private int weight=50;
 
 	// ÎÞ²Îº¯Êý
 	public Person() {
