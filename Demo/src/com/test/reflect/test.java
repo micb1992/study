@@ -2,10 +2,11 @@ package com.test.reflect;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
-import javax.activation.FileDataSource;
 
 import org.junit.Test;
+
 
 
 
@@ -87,38 +88,71 @@ public class test {
 	
 	}
 	@Test
-	public void filedAnaysisClass() throws Exception{
-		//获取公有成员变量--公有字段
-        System.out.println("************获取所有公有的字段********************");  
-        Class persponClass1 = Class.forName("com.test.reflect.Person");
-		Field[] personfield1 =persponClass1.getFields();
-		for(Field field:personfield1){
+	public void filedAnaysisClass() throws Exception {
+		// 获取公有成员变量--公有字段
+		System.out.println("************获取所有公有的字段********************");
+		Class persponClass1 = Class.forName("com.test.reflect.Person");
+		Field[] personfield1 = persponClass1.getFields();
+		for (Field field : personfield1) {
 			System.out.println(field);
 		}
-		//获取所有字段，包含私有--public protected private 默认
-        System.out.println("************获取所有的字段***********************");  
+		// 获取所有字段，包含私有--public protected private 默认
+		System.out.println("************获取所有的字段***********************");
 		Class persponClass2 = Class.forName("com.test.reflect.Person");
-		Field[] personfield2 =persponClass2.getDeclaredFields();
-		for(Field field:personfield2){
+		Field[] personfield2 = persponClass2.getDeclaredFields();
+		for (Field field : personfield2) {
 			System.out.println(field);
 		}
-		//获取公有成员变量并进行初始化
-		   System.out.println("************获取公有字段并调用***********************");  
-			Class persponClass3 = Class.forName("com.test.reflect.Person");
-			Field personfield3 =persponClass3.getField("name");
-			Person person5 = (Person) persponClass3.getConstructor().newInstance();
-			personfield3.set(person5, "lala");
-			System.out.println("验证获取成员变量值："+person5.name);
-			
-			//获取私有成员变量并进行初始化
-			   System.out.println("************获取私有字段并调用***********************");  
-				Class persponClass4 = Class.forName("com.test.reflect.Person");
-				Field personfield4 =persponClass4.getField("name");
-				Person person6 = (Person) persponClass4.getConstructor().newInstance();
-				personfield4.setAccessible(true);
-				personfield4.set(person6, "呵呵哒");
-				System.out.println("验证获取成员变量值："+person6.name);
-				
-	}
+		// 获取公有成员变量并进行初始化
+		System.out.println("************获取公有字段并调用***********************");
+		Class persponClass3 = Class.forName("com.test.reflect.Person");
+		Field personfield3 = persponClass3.getField("name");
+		Person person5 = (Person) persponClass3.getConstructor().newInstance();
+		personfield3.set(person5, "lala");
+		System.out.println("验证获取成员变量值：" + person5.name);
 
+		// 获取私有成员变量并进行初始化
+		System.out.println("************获取私有字段并调用***********************");
+		Class persponClass4 = Class.forName("com.test.reflect.Person");
+		Field personfield4 = persponClass4.getField("name");
+		Person person6 = (Person) persponClass4.getConstructor().newInstance();
+		personfield4.setAccessible(true);
+		personfield4.set(person6, "呵呵哒");
+		System.out.println("验证获取成员变量值：" + person6.name);
+
+	}
+@Test
+	public void methodAnaysisClass() throws Exception{
+	
+		Class personClass4 = Class.forName("com.test.reflect.Person");
+		//获取公有成员方法，包含继承的父类
+		Method[] personMethod1 = personClass4.getMethods();
+		for(Method method:personMethod1){
+			System.out.println("获取的公有成员方法"+method);
+		}
+		//获取所有成员方法，包含私有，不包含继承的父类
+		Method[] personMethod2 = personClass4.getDeclaredMethods();
+		for(Method method:personMethod2){
+			System.out.println("获取的所有成员方法"+method);
+		}
+		//调用无参方法
+		Method perMethod3 = personClass4.getMethod("eat", null);
+		Person person7 = (Person)personClass4.getConstructor().newInstance();
+		perMethod3.invoke(person7, null);
+		//调用有参数的方法
+		Method perMethod4 = personClass4.getMethod("show", String.class);
+		Person person8 = (Person)personClass4.getConstructor().newInstance();
+		perMethod4.invoke(person8, "Boy");
+		//调用私有方法
+		Method perMethod5 = personClass4.getDeclaredMethod("run", null);
+		Constructor constructorMethod = personClass4.getDeclaredConstructor(
+				String.class, int.class);
+		Person person9 = (Person) constructorMethod.newInstance("雅马哈", 18);
+		perMethod5.setAccessible(true);
+		perMethod4.invoke(person9, null);
+
+
+		
+	}
 }
+

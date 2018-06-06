@@ -1,6 +1,5 @@
 package com.test.reflect;
 
-import java.awt.List;
 
 public class Person {
 	public String name = "";
@@ -23,6 +22,7 @@ System.out.println("------无参函数被调用了-----");
 
 	protected  Person(String name, int age) {
 		this.age = age;
+		this.name = name;
 		System.out.println("-----受保护的构造函数-----");
 		System.out.println("-----" + name + age + "岁了-----");
 		run();
@@ -54,5 +54,8 @@ System.out.println("------无参函数被调用了-----");
 		} else {
 			System.out.println("她今年" + age + "岁了,是个漂亮的饭桶");
 		}
+	}
+	public void show(String name){
+		System.out.println("调用了带参方法:"+name+"在");
 	}
 }
