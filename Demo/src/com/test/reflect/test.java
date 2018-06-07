@@ -7,6 +7,8 @@ import java.lang.reflect.Method;
 
 import org.junit.Test;
 
+import com.sun.tracing.dtrace.ArgsAttributes;
+
 
 
 
@@ -17,10 +19,11 @@ public class test {
 		//constructorLoadClass();
 		//constructorAnalysisClass();
 		//filedAnaysisClass();
+		System.out.println("main方法執行了");
 	}
 
 
-
+@Test
 	public void constructorLoadClass() throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("反射----获取公共、受保护的构造函数");
@@ -52,7 +55,7 @@ public class test {
 
 	}
 
-	
+	@Test
 	public void constructorAnalysisClass() throws Exception {
 		// TODO Auto-generated method stub
 		/*	解析类：
@@ -122,28 +125,28 @@ public class test {
 
 	}
 @Test
-	public void methodAnaysisClass() throws Exception{
-	
+	public void methodAnaysisClass() throws Exception {
+
 		Class personClass4 = Class.forName("com.test.reflect.Person");
-		//获取公有成员方法，包含继承的父类
+		// 获取公有成员方法，包含继承的父类
 		Method[] personMethod1 = personClass4.getMethods();
-		for(Method method:personMethod1){
-			System.out.println("获取的公有成员方法"+method);
+		for (Method method : personMethod1) {
+			System.out.println("获取的公有成员方法" + method);
 		}
-		//获取所有成员方法，包含私有，不包含继承的父类
+		// 获取所有成员方法，包含私有，不包含继承的父类
 		Method[] personMethod2 = personClass4.getDeclaredMethods();
-		for(Method method:personMethod2){
-			System.out.println("获取的所有成员方法"+method);
+		for (Method method : personMethod2) {
+			System.out.println("获取的所有成员方法" + method);
 		}
-		//调用无参方法
+		// 调用无参方法
 		Method perMethod3 = personClass4.getMethod("eat", null);
-		Person person7 = (Person)personClass4.getConstructor().newInstance();
+		Person person7 = (Person) personClass4.getConstructor().newInstance();
 		perMethod3.invoke(person7, null);
-		//调用有参数的方法
+		// 调用有参数的方法
 		Method perMethod4 = personClass4.getMethod("show", String.class);
-		Person person8 = (Person)personClass4.getConstructor().newInstance();
+		Person person8 = (Person) personClass4.getConstructor().newInstance();
 		perMethod4.invoke(person8, "Boy");
-		//调用私有方法
+		// 调用私有方法
 		Method perMethod5 = personClass4.getDeclaredMethod("run", null);
 		Constructor constructorMethod = personClass4.getDeclaredConstructor(
 				String.class, int.class);
@@ -151,8 +154,15 @@ public class test {
 		perMethod5.setAccessible(true);
 		perMethod4.invoke(person9, null);
 
-
-		
 	}
+@Test
+public void operateMainClass() throws Exception{
+	//反射操作main方法
+	Class mainClass = Class.forName("com.test.reflect.test");
+	Method mainMethod = mainClass.getDeclaredMethod("main", String[].class);
+	//调用时需要进行强制转换
+	mainMethod.invoke(null, (Object)new String[]{"a","b","c"});
+	
+}
 }
 
