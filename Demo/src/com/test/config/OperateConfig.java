@@ -33,6 +33,7 @@ public class OperateConfig {
 		Properties properties = new Properties();
 		FileOutputStream outputStream = new FileOutputStream(new File("src/com/test/config/sys-config.properties"), true);
 		properties.setProperty("IP", "192.168.0.1");
+		properties.store(outputStream, "sys-config");
 		outputStream.close();
 	}
 }
