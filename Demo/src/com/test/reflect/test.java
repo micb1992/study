@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 import org.junit.Test;
 
 import com.sun.tracing.dtrace.ArgsAttributes;
+import com.test.config.OperateConfig;
 
 
 
@@ -19,6 +20,7 @@ public class test {
 		//constructorLoadClass();
 		//constructorAnalysisClass();
 		//filedAnaysisClass();
+		//operateConfig();
 		System.out.println("main方法執行了");
 	}
 
@@ -163,6 +165,18 @@ public void operateMainClass() throws Exception{
 	//调用时需要进行强制转换
 	mainMethod.invoke(null, (Object)new String[]{"a","b","c"});
 	
+}
+
+//通过反射运行配置文件内容
+@Test
+public void operateConfig() throws Exception{
+	OperateConfig operateConfig= new OperateConfig();
+	//operateConfig.writeProperties("className", "com.test.reflect.Person");
+	String vString = operateConfig.readProperties("className");
+	System.out.println("value:"+vString);
+	Class personclClass5 = Class.forName(operateConfig.readProperties("className"));
+	Constructor constructor5 = personclClass5.getDeclaredConstructor(String.class,int.class);
+	Person person10 = (Person) constructor5.newInstance("girl",13);
 }
 }
 

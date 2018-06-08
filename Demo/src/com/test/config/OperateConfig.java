@@ -21,10 +21,12 @@ public class OperateConfig {
 				"src/com/test/config/sys-config.properties");
 		properties.load(inputStream);
 		Iterator<String> iterator = properties.stringPropertyNames().iterator();
-		while (iterator.hasNext()) {
+		/*
+		 * 输出所有的value
+		 * while (iterator.hasNext()) {
 			key = iterator.next();
 			System.out.println(key + ":" + properties.getProperty(key));
-		}
+		}*/
 		inputStream.close();
 		return properties.getProperty(key);
 	}
